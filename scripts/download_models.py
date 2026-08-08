@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Download and verify model weights for the pipeline."""
-import os
 import sys
 
 MODELS = {
