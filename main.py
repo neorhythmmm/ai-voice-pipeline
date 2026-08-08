@@ -3,7 +3,7 @@
 main.py — AI Voice Pipeline entry point.
 
 Full-duplex voice conversation pipeline:
-Microphone → VAD (Silero) → STT (GigaAM) → LLM → TTS (Kokoro) → Speaker
+Microphone -> VAD (Silero) -> STT (GigaAM) -> LLM -> TTS (Kokoro) -> Speaker
 
 Usage: python main.py [--config config.yaml]
 """
@@ -17,7 +17,10 @@ import yaml
 
 from processor import AudioProcessor, PipelineConfig
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
 logger = logging.getLogger("voice-pipeline")
 
 
@@ -44,7 +47,11 @@ async def run_pipeline(cfg: PipelineConfig) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="AI Voice Pipeline")
-    parser.add_argument("--config", default="config.yaml", help="Path to config file")
+    parser.add_argument(
+        "--config",
+        default="config.yaml",
+        help="Path to config file",
+    )
     args = parser.parse_args()
 
     if not Path(args.config).exists():
