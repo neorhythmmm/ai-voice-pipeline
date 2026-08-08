@@ -8,7 +8,6 @@ LLM interaction, and TTS synthesis.
 import asyncio
 import logging
 from dataclasses import dataclass, field
-from typing import Optional
 
 import numpy as np
 
@@ -74,13 +73,11 @@ class AudioProcessor:
 
     async def _capture_audio(self) -> np.ndarray:
         """Capture audio from microphone (placeholder for sounddevice)."""
-        # In production, this uses sounddevice or PyAudio
         logger.debug("Capturing audio chunk...")
         return np.array([], dtype=np.int16)
 
-    def _vad_segment(self, audio: np.ndarray) -> list[np.ndarray]:
+    def _vad_segment(self, audio: np.ndarray) -> list:
         """Split audio into speech segments using VAD confidence."""
-        # Simplified VAD — in production uses SileroVAD
         segments = []
         if len(audio) > 0:
             segments.append(audio)
@@ -89,23 +86,20 @@ class AudioProcessor:
     async def _transcribe(self, audio: np.ndarray) -> str:
         """Send audio to STT endpoint and return transcription."""
         logger.debug(f"Transcribing {len(audio)} samples...")
-        # In production: HTTP POST to STT endpoint
         return ""
 
     async def _generate_response(self, text: str) -> str:
         """Send text to LLM and return response."""
         logger.debug(f"LLM input: {text[:50]}...")
-        # In production: streaming API call to LLM
         return ""
 
     async def _synthesize(self, text: str) -> np.ndarray:
         """Convert text to speech via TTS endpoint."""
         logger.debug(f"TTS: {text[:50]}...")
-        # In production: HTTP POST to TTS endpoint
         return np.array([], dtype=np.int16)
 
     async def run(self):
-        """Main pipeline loop: capture → VAD → STT → LLM → TTS."""
+        """Main pipeline loop: capture -> VAD -> STT -> LLM -> TTS."""
         self._running = True
         logger.info("Pipeline started")
 
@@ -123,7 +117,6 @@ class AudioProcessor:
                     audio_out = await self._synthesize(response)
 
                     if len(audio_out) > 0:
-                        # Playback handled by output device
                         logger.info(f"Played response: {response[:50]}...")
 
             except asyncio.CancelledError:
