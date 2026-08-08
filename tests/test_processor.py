@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """test_processor.py — Minimal sanity test for audio pipeline."""
 import sys
+
 sys.path.insert(0, ".")
 
-from processor import PipelineConfig, AudioProcessor
+from processor import PipelineConfig  # noqa: E402
 
 
 def test_config_default():
@@ -13,7 +14,8 @@ def test_config_default():
 
 
 def test_config_from_dict():
-    cfg = PipelineConfig.from_dict({"stt": {"model": "test-model"}, "pipeline": {"sample_rate": 22050}})
+    data = {"stt": {"model": "test-model"}, "pipeline": {"sample_rate": 22050}}
+    cfg = PipelineConfig.from_dict(data)
     assert cfg.stt.model == "test-model"
     assert cfg.sample_rate == 22050
 
