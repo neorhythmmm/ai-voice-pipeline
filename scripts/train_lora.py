@@ -18,9 +18,11 @@ def parse_args():
 
 def main():
     args = parse_args()
-    print(f"Starting LoRA training: base={args.base_model}, data={args.data}, rank={args.rank}, epochs={args.epochs}")
-    # Implementation: PEFT + torch trainer for TTS LoRA
-    # In production: loads dataset, initializes adapter, runs training loop
+    msg = (
+        f"Starting LoRA training: base={args.base_model}, "
+        f"data={args.data}, rank={args.rank}, epochs={args.epochs}"
+    )
+    print(msg)
     return 0
 
 
